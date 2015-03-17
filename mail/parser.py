@@ -1,14 +1,22 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/python
+# !/usr/bin/python
 
 import csv
+import init_database
+import mailmeta
 
-with open('bj5_IpResolved.csv') as csvfile:
-	reader = csv.DictReader(csvfile)
-	index = 0
-	for row in reader:
-		index += 1
-		if index > 100:
-			break
-		print(row['Sender'], row['Recipient(s)'],row['Timestamp'], row['Subject'],row['SenderIP'], row['SenderHostName'],row['Mail'])
+def parse_file(file_name):
+    with open(file_name) as csvfile:
+        reader = csv.DictReader(csvfile)
+        conn = init_database.init_database()
+        for row in reader:
+           amail = mailmeta(row);
+
+def parse_row(row,conn):
+    sender = row['Sender']
+    Timestamp = row['TimeStamp']
+
+
+
+
 
